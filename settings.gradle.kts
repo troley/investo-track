@@ -11,3 +11,4 @@ pluginManagement {
 
 rootProject.name = "investo-track"
 include("webapp")
+include("coingecko-dataprovider")
