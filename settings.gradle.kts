@@ -6,7 +6,13 @@ pluginManagement {
     }
     repositories {
         mavenCentral()
+        gradlePluginPortal()
     }
+}
+
+// This ia a settings plugin and must be applied in the settings file.
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.7.0"
 }
 
 rootProject.name = "investo-track"
