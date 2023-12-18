@@ -21,6 +21,8 @@ val intTestRuntimeOnly: Configuration by configurations.getting
 configurations["intTestRuntimeOnly"].extendsFrom(configurations.runtimeOnly.get())
 
 dependencies {
+	implementation(project(":dataprovider-core"))
+
 	implementation("org.springframework.boot:spring-boot-starter-webflux:3.2.0")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.0")

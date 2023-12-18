@@ -1,12 +1,20 @@
 package com.example.investotrack.coingeckodataprovider.client.model;
 
+import com.example.investotrack.dataprovidercore.model.AbstractCurrency;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 /**
  * Represents a cryptocurrency data model as provided by the CoinGecko API.
- *
- * @param id     the id of the cryptocurrency
- * @param symbol the symbol of the cryptocurrency (e.g. BTC, ETH etc.)
- * @param name   the name of the cryptocurrency (e.g. Bitcoin, Ethereum etc.)
  */
-public record CryptoCurrency(String id, String symbol, String name) implements Serializable {}
+public class CryptoCurrency extends AbstractCurrency implements Serializable {
+
+    @JsonCreator
+    public CryptoCurrency(@JsonProperty("id") String id,
+                          @JsonProperty("symbol") String symbol,
+                          @JsonProperty("name") String name) {
+        super(id, symbol, name);
+    }
+}
