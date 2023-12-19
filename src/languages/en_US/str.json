@@ -1,1 +1,9 @@
-{}
+{
+  "Navbar": {
+    "BrandText": "Investo Track",
+    "Sidebar": {
+      "CloseText": "Close sidebar",
+      "OpenText": "Open sidebar"
+    }
+  }
+}
