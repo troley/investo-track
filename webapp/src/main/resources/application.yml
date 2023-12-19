@@ -1,3 +1,12 @@
 data-provider:
   coin-gecko:
     enabled: true
+
+spring:
+  cache:
+    cache-names: currencies
+    redis:
+      # Half a day seems reasonable now. When new currencies get added/removed, we will keep those for at most 12 hours.
+      # After that, we'll obtain fresh data.
+      time-to-live: 12h
+      cache-null-values: false
