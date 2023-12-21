@@ -1,0 +1,15 @@
+{
+  "Home": {
+    "SearchField": {
+      "LabelText": "Currency",
+      "PlaceholderText": "Enter currency..."
+    }
+  },
+  "Navbar": {
+    "BrandText": "Investo Track",
+    "Sidebar": {
+      "CloseText": "Close sidebar",
+      "OpenText": "Open sidebar"
+    }
+  }
+}
