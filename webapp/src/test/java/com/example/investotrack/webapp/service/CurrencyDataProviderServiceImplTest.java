@@ -75,4 +75,56 @@ class CurrencyDataProviderServiceImplTest {
         // Assert
         assertTrue(result.isEmpty());
     }
+
+    @Test
+    void findCaseInsensitiveCurrenciesBy_randomCaseNoMatch_returnsEmptyList() {
+        // Arrange
+        var btc = new AbstractCurrency("btc", "btc", "Bitcoin") {
+        };
+        var btcLite = new AbstractCurrency("btcLite", "btclite", "Bitcoin Lite") {
+        };
+        var eth = new AbstractCurrency("eth", "eth", "Ethereum") {
+        };
+
+        var btcViewModel = new CurrencyViewModel("btc", "btc", "Bitcoin");
+        var btcLiteViewModel = new CurrencyViewModel("btcLite", "btclite", "Bitcoin Lite");
+        var ethViewModel = new CurrencyViewModel("eth", "eth", "Ethereum");
+
+        when(currencyDataProvider.listAllCurrencies()).thenAnswer((invocationOnMock -> List.of(btc, btcLite, eth)));
+        when(convertor.toViewModel(any(AbstractCurrency.class))).thenReturn(btcViewModel,
+                                                                            btcLiteViewModel,
+                                                                            ethViewModel);
+
+        // Act
+        Collection<CurrencyViewModel> result = currencyDataProviderService.findCaseInsensitiveCurrenciesBy("dOgE");
+
+        // Assert
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void findCaseInsensitiveCurrenciesBy_randomCaseMatch_returnsMatchingCoins() {
+        // Arrange
+        var btc = new AbstractCurrency("btc", "btc", "Bitcoin") {
+        };
+        var btcLite = new AbstractCurrency("btcLite", "btclite", "Bitcoin Lite") {
+        };
+        var eth = new AbstractCurrency("eth", "eth", "Ethereum") {
+        };
+
+        var btcViewModel = new CurrencyViewModel("btc", "btc", "Bitcoin");
+        var btcLiteViewModel = new CurrencyViewModel("btcLite", "btclite", "Bitcoin Lite");
+        var ethViewModel = new CurrencyViewModel("eth", "eth", "Ethereum");
+
+        when(currencyDataProvider.listAllCurrencies()).thenAnswer((invocationOnMock -> List.of(btc, btcLite, eth)));
+        when(convertor.toViewModel(any(AbstractCurrency.class))).thenReturn(btcViewModel,
+                                                                            btcLiteViewModel,
+                                                                            ethViewModel);
+
+        // Act
+        Collection<CurrencyViewModel> result = currencyDataProviderService.findCaseInsensitiveCurrenciesBy("bTc");
+
+        // Assert
+        assertThat(result).containsExactly(btcViewModel, btcLiteViewModel);
+    }
 }
