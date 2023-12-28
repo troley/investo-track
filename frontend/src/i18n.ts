@@ -9,3 +9,5 @@ i18n.use(initReactI18next).init({
   fallbackLng: "en-US",
   debug: import.meta.env.DEV,
 });
+
+export default { i18n };

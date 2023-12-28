@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 
@@ -17,6 +18,12 @@ export default ({ mode }) => {
       proxy: {
         "/api": process.env.VITE_BACK_END_BASE_URL,
       },
+    },
+    test: {
+      globals: true,
+      root: __dirname,
+      environment: "jsdom",
+      setupFiles: ["./vitest.setup.ts"],
     },
   });
 };
