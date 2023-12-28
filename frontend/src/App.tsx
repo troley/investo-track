@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { getAll } from "./service/currency-service";
 import Currency from "./model/currency";
 import SearchField from "./components/SearchField";
+import ItemsButtonList from "./components/data_display/ItemsButtonList";
 
 function App() {
   const { t } = useTranslation();
@@ -24,6 +25,10 @@ function App() {
     }
   }, [query]);
 
+  const handleCurrencyClick = (currencyId: string) => {
+    // TODO: to be implemented
+  };
+
   return (
     <div className="container mx-auto">
       <div className="row-auto">
@@ -36,12 +41,14 @@ function App() {
           {isFetching ? (
             <span className="loading loading-spinner loading-md"></span>
           ) : (
-            <div className="join join-vertical max-h-60 overflow-auto">
-              {data &&
-                data.map((currency: Currency) => (
-                  <button className="btn join-item">{currency.name}</button>
-                ))}
-            </div>
+            data && (
+              <ItemsButtonList
+                data={data.map((d) => {
+                  return { id: d.id, displayValue: d.name };
+                })}
+                itemClickHandler={handleCurrencyClick}
+              />
+            )
           )}
         </div>
       </div>
