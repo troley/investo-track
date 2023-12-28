@@ -1,4 +1,4 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, it } from "vitest";
 import { waitFor, screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
@@ -19,7 +19,7 @@ describe("<App />", async () => {
   );
 
   describe("Get all currencies", () => {
-    test("clicks on <SearchField /> and provides no input, does not trigger fetch", async () => {
+    it("should not trigger Fetch when <SearchField /> is clicked without providing any input", async () => {
       // Arrange
       render(
         <I18nextProvider i18n={i18n.i18n}>
@@ -39,7 +39,7 @@ describe("<App />", async () => {
       expect(await screen.queryByText("Bitcoin")).not.toBeInTheDocument();
     });
 
-    test("Provides 'btc' as input to <SearchField />, fetches expected coin", async () => {
+    it("should fetch expected currencies when <SearchField /> receives 'btc' as input", async () => {
       // Arrange
       render(
         <I18nextProvider i18n={i18n.i18n}>
