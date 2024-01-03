@@ -1,7 +1,9 @@
 package com.example.investotrack.coingeckodataprovider;
 
+import com.example.investotrack.coingeckodataprovider.client.CoinGeckoAttributionClient;
 import com.example.investotrack.coingeckodataprovider.client.CoinGeckoClient;
 import com.example.investotrack.coingeckodataprovider.client.CoinGeckoRestClient;
+import com.example.investotrack.dataprovidercore.AttributionDataProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -20,5 +22,11 @@ public class CoinGeckoClientConfiguration {
     @ConditionalOnMissingBean
     public CoinGeckoClient coinGeckoClient(CoinGeckoProperties coinGeckoProperties) {
         return new CoinGeckoRestClient(coinGeckoProperties);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public AttributionDataProvider coinGeckoAttributionClient(CoinGeckoProperties coinGeckoProperties) {
+        return new CoinGeckoAttributionClient(coinGeckoProperties);
     }
 }
