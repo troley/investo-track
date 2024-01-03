@@ -3,7 +3,6 @@ package com.example.investotrack.webapp.controller;
 import com.example.investotrack.webapp.service.CurrencyDataProviderService;
 import com.example.investotrack.webapp.validation.ValidApiVersion;
 import com.example.investotrack.webapp.viewmodel.CurrencyViewModel;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +13,6 @@ import java.util.Collection;
 @RequestMapping("/api/v{version}/currency")
 public class CurrencyApiController {
 
-    @NotNull
     private final CurrencyDataProviderService currencyDataProviderService;
 
     public CurrencyApiController(CurrencyDataProviderService currencyDataProviderService) {
