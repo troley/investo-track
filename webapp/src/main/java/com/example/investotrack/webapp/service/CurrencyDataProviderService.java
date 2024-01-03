@@ -6,7 +6,7 @@ import com.example.investotrack.webapp.viewmodel.CurrencyViewModel;
 import java.util.Collection;
 
 /**
- * CoinGecko service providing features provided by {@link com.example.investotrack.coingeckodataprovider.client.CoinGeckoClient}.
+ * Service providing features of a currency data provider.
  */
 public interface CurrencyDataProviderService {
 
