@@ -6,6 +6,8 @@ import Currency from "./model/currency";
 import SearchField from "./components/SearchField";
 import ItemsButtonList from "./components/data_display/ItemsButtonList";
 
+export const debounceTime = 1500;
+
 function App() {
   const { t } = useTranslation();
 
@@ -20,7 +22,7 @@ function App() {
 
   useEffect(() => {
     if (query) {
-      const timeoutId = setTimeout(() => refetch(), 1500);
+      const timeoutId = setTimeout(() => refetch(), debounceTime);
       return () => clearTimeout(timeoutId);
     }
   }, [query]);

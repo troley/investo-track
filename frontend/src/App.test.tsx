@@ -5,7 +5,7 @@ import "@testing-library/jest-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
-import App from "./App";
+import App, { debounceTime } from "./App";
 
 describe("<App />", async () => {
   const queryClient = new QueryClient({
@@ -39,7 +39,7 @@ describe("<App />", async () => {
       expect(await screen.queryByText("Bitcoin")).not.toBeInTheDocument();
     });
 
-    it("should fetch expected currencies when <SearchField /> receives 'btc' as input", async () => {
+    it("should fetch only currencies that contain the <SearchField /> input text", async () => {
       // Arrange
       render(
         <I18nextProvider i18n={i18n.i18n}>
@@ -57,9 +57,12 @@ describe("<App />", async () => {
       // Assert
       expect(field).toHaveValue("btc");
       await waitFor(
-        () => expect(screen.getByText("Bitcoin")).toBeInTheDocument(),
+        async () => {
+          expect(screen.getByText("Bitcoin")).toBeInTheDocument();
+          expect(await screen.queryByText("Ethereum")).not.toBeInTheDocument();
+        },
         {
-          timeout: 1600,
+          timeout: debounceTime + 100, // Timeout a bit longer
         }
       );
     });

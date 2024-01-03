@@ -14,7 +14,17 @@ export const currencies = [
 ];
 
 export const handlers = [
-  http.get(`${import.meta.env.VITE_API_FIND_CURRENCIES_URL}?q=btc`, () => {
-    return HttpResponse.json(currencies);
+  http.get(`${import.meta.env.VITE_API_FIND_CURRENCIES_URL}`, (resolver) => {
+    const searchParam = new URL(resolver.request.url).searchParams.get("q");
+
+    if (searchParam === null) {
+      return HttpResponse.json();
+    }
+
+    return HttpResponse.json(
+      currencies.filter(
+        (c) => c.symbol.includes(searchParam) || c.name.includes(searchParam)
+      )
+    );
   }),
 ];
