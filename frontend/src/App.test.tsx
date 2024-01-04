@@ -3,7 +3,6 @@ import { waitFor, screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
 import App, { debounceTime } from "./App";
 import { attribution } from "./mocks/handlers";
@@ -13,21 +12,15 @@ describe("<App />", async () => {
     defaultOptions: { queries: { retry: false } },
   });
 
-  const fieldPlaceholderText = i18n.i18n.getResource(
-    "en-US",
-    "translation",
-    "Home.SearchField.PlaceholderText"
-  );
+  const fieldPlaceholderText = i18n.i18n.t("Home.SearchField.PlaceholderText");
 
   describe("Get all currencies", () => {
     it("should not trigger Fetch when <SearchField /> is clicked without providing any input", async () => {
       // Arrange
       render(
-        <I18nextProvider i18n={i18n.i18n}>
-          <QueryClientProvider client={queryClient}>
-            <App />
-          </QueryClientProvider>
-        </I18nextProvider>
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
       );
 
       const field = screen.getByPlaceholderText(fieldPlaceholderText);
@@ -43,11 +36,9 @@ describe("<App />", async () => {
     it("should fetch only currencies that contain the <SearchField /> input text", async () => {
       // Arrange
       render(
-        <I18nextProvider i18n={i18n.i18n}>
-          <QueryClientProvider client={queryClient}>
-            <App />
-          </QueryClientProvider>
-        </I18nextProvider>
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
       );
 
       const field = screen.getByPlaceholderText(fieldPlaceholderText);
@@ -72,11 +63,9 @@ describe("<App />", async () => {
   it("should fetch and display <AttributionLabel> when available and <App /> is rendered", async () => {
     // Arrange
     render(
-      <I18nextProvider i18n={i18n.i18n}>
-        <QueryClientProvider client={queryClient}>
-          <App />
-        </QueryClientProvider>
-      </I18nextProvider>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
     );
 
     // Assert
