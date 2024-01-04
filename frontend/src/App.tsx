@@ -31,7 +31,7 @@ function App() {
     }
   }, [query]);
 
-  const handleCurrencyClick = (currencyId: string) => {
+  const handleCurrencyClick = () => {
     // TODO: to be implemented
   };
 
