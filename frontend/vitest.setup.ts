@@ -3,6 +3,9 @@ import { server } from "./src/mocks/node";
 
 beforeAll(() => server.listen());
 
-afterEach(() => server.resetHandlers());
+afterEach(() => {
+  vi.restoreAllMocks();
+  server.resetHandlers();
+});
 
 afterAll(() => server.close());
