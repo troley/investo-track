@@ -5,6 +5,8 @@ import { getAll } from "./service/currency-service";
 import Currency from "./model/currency";
 import SearchField from "./components/SearchField";
 import ItemsButtonList from "./components/data_display/ItemsButtonList";
+import AttributionLabel from "./components/attribution/AttributionLabel";
+import { useAttributionQuery } from "./hooks/attribution-hooks";
 
 export const debounceTime = 1500;
 
@@ -19,6 +21,8 @@ function App() {
     enabled: false,
     retry: false,
   });
+
+  const attributionQuery = useAttributionQuery();
 
   useEffect(() => {
     if (query) {
@@ -40,6 +44,9 @@ function App() {
             fieldLabelText={t("Home.SearchField.LabelText")}
             fieldPlaceholderText={t("Home.SearchField.PlaceholderText")}
           />
+          {attributionQuery.data && (
+            <AttributionLabel data={attributionQuery.data} />
+          )}
           {isFetching ? (
             <span className="loading loading-spinner loading-md"></span>
           ) : (

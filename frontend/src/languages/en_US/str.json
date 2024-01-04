@@ -1,4 +1,7 @@
 {
+  "Attribution": {
+    "LabelText": "Powered by {{brand}}"
+  },
   "Home": {
     "SearchField": {
       "LabelText": "Currency",
