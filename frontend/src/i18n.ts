@@ -7,7 +7,7 @@ i18n.use(initReactI18next).init({
     "en-US": { translation: en_US },
   },
   fallbackLng: "en-US",
-  debug: import.meta.env.DEV,
+  debug: import.meta.env.DEV && !import.meta.env.TEST,
 });
 
 export default { i18n };
