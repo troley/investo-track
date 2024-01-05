@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest",
-    "prepare": "husky install"
+    "prepare": "cd .. && husky install"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.14.1",
