@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getAll } from "./service/currency-service";
-import Currency from "./model/currency";
-import SearchField from "./components/SearchField";
-import ItemsButtonList from "./components/data_display/ItemsButtonList";
-import AttributionLabel from "./components/attribution/AttributionLabel";
-import { useAttributionQuery } from "./hooks/attribution-hooks";
+import { getAll } from "../service/currency-service";
+import Currency from "../model/currency";
+import SearchField from "../components/SearchField";
+import ItemsButtonList from "../components/data_display/ItemsButtonList";
+import AttributionLabel from "../components/attribution/AttributionLabel";
+import { useAttributionQuery } from "../hooks/attribution-hooks";
 
 export const debounceTime = 1500;
 

@@ -3,9 +3,9 @@ import { waitFor, screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import i18n from "./i18n";
+import i18n from "../i18n";
 import App, { debounceTime } from "./App";
-import { attribution } from "./mocks/handlers";
+import { attribution } from "../mocks/handlers";
 
 describe("<App />", async () => {
   const queryClient = new QueryClient({
@@ -20,7 +20,7 @@ describe("<App />", async () => {
       render(
         <QueryClientProvider client={queryClient}>
           <App />
-        </QueryClientProvider>
+        </QueryClientProvider>,
       );
 
       const field = screen.getByPlaceholderText(fieldPlaceholderText);
@@ -38,7 +38,7 @@ describe("<App />", async () => {
       render(
         <QueryClientProvider client={queryClient}>
           <App />
-        </QueryClientProvider>
+        </QueryClientProvider>,
       );
 
       const field = screen.getByPlaceholderText(fieldPlaceholderText);
@@ -55,7 +55,7 @@ describe("<App />", async () => {
         },
         {
           timeout: debounceTime + 100, // Timeout a bit longer
-        }
+        },
       );
     });
   });
@@ -65,14 +65,14 @@ describe("<App />", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <App />
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     // Assert
     await waitFor(() =>
       expect(
-        screen.getByText(`Powered by ${attribution.brand}`)
-      ).toBeInTheDocument()
+        screen.getByText(`Powered by ${attribution.brand}`),
+      ).toBeInTheDocument(),
     );
   });
 });
