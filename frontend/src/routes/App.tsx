@@ -29,7 +29,7 @@ function App() {
       const timeoutId = setTimeout(() => refetch(), debounceTime);
       return () => clearTimeout(timeoutId);
     }
-  }, [query]);
+  }, [query, refetch]);
 
   const handleCurrencyClick = () => {
     // TODO: to be implemented
