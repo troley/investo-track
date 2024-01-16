@@ -25,7 +25,7 @@ public class CurrencyApiController {
     }
 
     @GetMapping("/find_by")
-    public Collection<CurrencyViewModel> findBy(@RequestParam("q") String query,
+    public Collection<CurrencyViewModel> findBy(@RequestParam(value = "q", required = false) String query,
                                                 @PathVariable @ValidApiVersion String version) {
         return currencyDataProviderService.findCaseInsensitiveCurrenciesBy(query);
     }
