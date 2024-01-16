@@ -4,6 +4,7 @@ import com.example.investotrack.dataprovidercore.CurrencyDataProvider;
 import com.example.investotrack.webapp.datastore.DataCache;
 import com.example.investotrack.webapp.viewmodel.CurrencyViewModel;
 import com.example.investotrack.webapp.viewmodel.convertor.CurrencyModelConvertor;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -38,7 +39,10 @@ class CurrencyDataProviderServiceImpl implements CurrencyDataProviderService {
     }
 
     @Override
-    public Collection<CurrencyViewModel> findCaseInsensitiveCurrenciesBy(String query) {
+    public Collection<CurrencyViewModel> findCaseInsensitiveCurrenciesBy(@Nullable String query) {
+        if (query == null || query.isBlank()) {
+            return listAllCurrencies().stream().toList();
+        }
         String ciq = query.toLowerCase(Locale.ROOT);
         return listAllCurrencies().stream()
                                   .filter(c -> lowerCased(c.name()).contains(ciq) ||

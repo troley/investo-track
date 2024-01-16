@@ -128,4 +128,67 @@ class CurrencyDataProviderServiceImplTest {
         // Assert
         assertThat(result).containsExactly(btcViewModel, btcLiteViewModel);
     }
+
+    @Test
+    void findCaseInsensitiveCurrenciesBy_queryNull_returnsAllCoins() {
+        // Arrange
+        var btcViewModel = new CurrencyViewModel("btc", "btc", "Bitcoin");
+        var btcLiteViewModel = new CurrencyViewModel("btcLite", "btclite", "Bitcoin Lite");
+        var ethViewModel = new CurrencyViewModel("eth", "eth", "Ethereum");
+
+        when(dataCache.getOrSupply(anyString(),
+                                   anyString(),
+                                   ArgumentMatchers.<Supplier<Collection<CurrencyViewModel>>>any())).thenReturn(List.of(
+                btcViewModel,
+                btcLiteViewModel,
+                ethViewModel));
+
+        // Act
+        Collection<CurrencyViewModel> result = currencyDataProviderService.findCaseInsensitiveCurrenciesBy(null);
+
+        // Assert
+        assertThat(result).contains(btcViewModel, btcLiteViewModel, ethViewModel);
+    }
+
+    @Test
+    void findCaseInsensitiveCurrenciesBy_queryEmptyString_returnsAllCoins() {
+        // Arrange
+        var btcViewModel = new CurrencyViewModel("btc", "btc", "Bitcoin");
+        var btcLiteViewModel = new CurrencyViewModel("btcLite", "btclite", "Bitcoin Lite");
+        var ethViewModel = new CurrencyViewModel("eth", "eth", "Ethereum");
+
+        when(dataCache.getOrSupply(anyString(),
+                                   anyString(),
+                                   ArgumentMatchers.<Supplier<Collection<CurrencyViewModel>>>any())).thenReturn(List.of(
+                btcViewModel,
+                btcLiteViewModel,
+                ethViewModel));
+
+        // Act
+        Collection<CurrencyViewModel> result = currencyDataProviderService.findCaseInsensitiveCurrenciesBy("");
+
+        // Assert
+        assertThat(result).contains(btcViewModel, btcLiteViewModel, ethViewModel);
+    }
+
+    @Test
+    void findCaseInsensitiveCurrenciesBy_queryOnlyWhitespace_returnsAllCoins() {
+        // Arrange
+        var btcViewModel = new CurrencyViewModel("btc", "btc", "Bitcoin");
+        var btcLiteViewModel = new CurrencyViewModel("btcLite", "btclite", "Bitcoin Lite");
+        var ethViewModel = new CurrencyViewModel("eth", "eth", "Ethereum");
+
+        when(dataCache.getOrSupply(anyString(),
+                                   anyString(),
+                                   ArgumentMatchers.<Supplier<Collection<CurrencyViewModel>>>any())).thenReturn(List.of(
+                btcViewModel,
+                btcLiteViewModel,
+                ethViewModel));
+
+        // Act
+        Collection<CurrencyViewModel> result = currencyDataProviderService.findCaseInsensitiveCurrenciesBy(" ");
+
+        // Assert
+        assertThat(result).contains(btcViewModel, btcLiteViewModel, ethViewModel);
+    }
 }
